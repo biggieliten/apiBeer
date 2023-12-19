@@ -8,19 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const base_url = "https://api.punkapi.com/v2/beers ";
-/* const users: User[] = [] */
-/* const user1: User = {
-    id:
-    name: string;
-    tagline: string;
-    abv: number;
-    food_pairing: string[];
-    ingredients: string | number [];
-    image_url?: string;
-    volume: number | string;
-    brewers_tips: string;
-    description: string;
-} */
+const wrapper = document.getElementById("wrapper");
 function fetchUserData(url) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -28,8 +16,8 @@ function fetchUserData(url) {
             if (!response.ok) {
                 throw new Error(`http error: ${response.status}`);
             }
-            const userData = yield response.json();
-            showData(userData);
+            const beerData = yield response.json();
+            showData(beerData);
         }
         catch (error) {
             console.error("Fetch error:", error);
@@ -41,5 +29,22 @@ fetchUserData(base_url);
 function showData(data) {
     data.forEach(beerInfo => {
         console.log(beerInfo.name);
+        const beerElement = document.createElement("div");
+        beerElement.textContent = `${beerInfo.name}`;
+        beerElement.classList.add("beer-" + beerInfo.id);
+        wrapper.appendChild(beerElement);
     });
+    // data.forEach(beerInfo => {
+    //     console.log(beerInfo.name);
+    // 	const beerElement = document.createElement("div");
+    // 	beerElement.textContent = `${beerInfo.name} `
+    // 	// const beerDesc = document.createElement("p");
+    // 	// const beerAbv = document.createElement("p");
+    // 	// const beerVol = document.createElement("p");
+    // 	// const beerIngred = document.createElement("p");
+    // 	// const beerHops = document.createElement("p");
+    // 	// const beerPairing = document.createElement("p");
+    // 	// const beerHops = document.createElement("p");
+    // 	// const beerHops = document.createElement("p");
+    // 	wrapper.appendChild(beerElement)
 }

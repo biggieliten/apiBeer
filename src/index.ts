@@ -1,4 +1,19 @@
-let BASE_URL = "https://api.punkapi.com/v2/beers " as string;
+const url:string = "https://api.punkapi.com/v2/beers ";
+
+async function fetchUserData(url: string): Promise<User []> {
+    try {
+const response = await fetch(url);
+if(!response.ok){
+    throw new Error(`http error: ${response.status}`)
+}
+const userData: User[] = await response.json();
+return userData
+} catch (error) {
+        console.error("Fetch error:", error);
+        throw new Error("Unable to fetch user data");
+
+    }
+}
 
 console.log(BASE_URL);
 

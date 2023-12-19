@@ -1,6 +1,6 @@
 const base_url :string = "https://api.punkapi.com/v2/beers ";
 
-interface User {
+interface BeerKeys {
     id: number;
     name: string;
     tagline: string;
@@ -33,7 +33,7 @@ const response = await fetch(url);
 if(!response.ok){
     throw new Error(`http error: ${response.status}`)
 }
-const userData: User[] = await response.json();
+const userData: BeerKeys[] = await response.json();
 showData(userData);
 
 }

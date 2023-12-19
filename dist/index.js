@@ -8,6 +8,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const base_url = "https://api.punkapi.com/v2/beers ";
+/* const users: User[] = [] */
+/* const user1: User = {
+    id:
+    name: string;
+    tagline: string;
+    abv: number;
+    food_pairing: string[];
+    ingredients: string | number [];
+    image_url?: string;
+    volume: number | string;
+    brewers_tips: string;
+    description: string;
+} */
 function fetchUserData(url) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -16,7 +29,7 @@ function fetchUserData(url) {
                 throw new Error(`http error: ${response.status}`);
             }
             const userData = yield response.json();
-            console.log(userData);
+            showData(userData);
         }
         catch (error) {
             console.error("Fetch error:", error);
@@ -24,19 +37,9 @@ function fetchUserData(url) {
         }
     });
 }
-let data = fetchUserData(base_url);
-// async function getBeer(): Promise<void> {
-//     try {
-//         function fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>
-//         console.log(fetch);
-//         if (fetch.status === 200) {
-//             const data: Exempel[] = await fetch.json();
-//             console.log(data);
-//         } else {
-//             throw Error('Något gick fel, försök igen senare');
-//         }
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
-// getBeer();
+fetchUserData(base_url);
+function showData(data) {
+    data.forEach(beerInfo => {
+        console.log(beerInfo.name);
+    });
+}

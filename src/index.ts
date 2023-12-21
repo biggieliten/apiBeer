@@ -34,9 +34,6 @@ async function fetchUserData(url: string) {
 
 fetchUserData(base_url)
 
-
-
-
 function showData(data: BeerKeys[]) {
     data.forEach(beerInfo => {
         console.log(beerInfo.name);
@@ -48,24 +45,28 @@ function showData(data: BeerKeys[]) {
         // skapa h2 element för namn
         const nameElement = document.createElement("h2");
         nameElement.textContent = beerInfo.name;
+		nameElement.classList.add("beerName" + beerInfo.id);
         beerElement.appendChild(nameElement);
 
         // Skapa och lägg till tagline
 
         const taglineElement = document.createElement("p");
         taglineElement.textContent = `Tagline: ${beerInfo.tagline}`;
+		taglineElement.classList.add("tagline" + beerInfo.id);
         beerElement.appendChild(taglineElement);
 
         // Skapa och lägg till ABV (alkoholhalt per volymenhet)
         
         const abvElement = document.createElement("p");
         abvElement.textContent = `ABV: ${beerInfo.abv}%`;
+		abvElement.classList.add("abv" + beerInfo.id)
         beerElement.appendChild(abvElement);
 
         // Skapa och lägg till beskrivningen
 
         const descriptionElement = document.createElement("p");
         descriptionElement.textContent = beerInfo.description;
+		descriptionElement.classList.add("description" + beerInfo.id);
         beerElement.appendChild(descriptionElement);
 
         // Skapa och lägg till en bild om tillgänglig
@@ -79,19 +80,22 @@ function showData(data: BeerKeys[]) {
         // Skapa och lägg till volymen
         const volumeElement = document.createElement("p");
         volumeElement.textContent = `Volume: ${beerInfo.volume}`;
+		volumeElement.classList.add("volume" + beerInfo.id);
         beerElement.appendChild(volumeElement);
 
         const foodPairingElement = document.createElement("ul");
         beerInfo.food_pairing.forEach(food => {
             const listItem = document.createElement("li");
             listItem.textContent = food;
+			foodPairingElement.classList.add("foodPairing" + beerInfo.id);
             foodPairingElement.appendChild(listItem);
-        });
+        });	
         beerElement.appendChild(foodPairingElement);
 
         // Skapa och lägg till bryggarens tips
         const tipsElement = document.createElement("p");
         tipsElement.textContent = `Brewer's Tips: ${beerInfo.brewers_tips}`;
+		tipsElement.classList.add("tips" + beerInfo.id);
         beerElement.appendChild(tipsElement);
 
         // Lägg till ölelementet i "wrapper"

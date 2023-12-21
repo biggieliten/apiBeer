@@ -28,14 +28,14 @@ function fetchUserData(url) {
 fetchUserData(base_url);
 function showData(data) {
     data.forEach(beerInfo => {
-        console.log(beerInfo.name);
+        // console.log(beerInfo.name);
         // skapa div element för varje ölsort
         const beerElement = document.createElement("div");
-        beerElement.classList.add("beer-" + beerInfo.id);
+        beerElement.setAttribute('id', `beer${beerInfo.id}`);
         // skapa h2 element för namn
         const nameElement = document.createElement("h2");
         nameElement.textContent = beerInfo.name;
-        nameElement.classList.add("beerName" + beerInfo.id);
+        nameElement.classList.add("name" + beerInfo.id);
         beerElement.appendChild(nameElement);
         // Skapa och lägg till tagline
         const taglineElement = document.createElement("p");
@@ -81,7 +81,19 @@ function showData(data) {
         // Lägg till ölelementet i "wrapper"
         wrapper.appendChild(beerElement);
     });
+    randomize();
 }
+function randomize() {
+    let randomizeBeerDivId = Math.floor(Math.random() * 25 + 1);
+    let idCheck = `beer${randomizeBeerDivId}`;
+    console.log(idCheck);
+    let randomBeer = document.getElementById(`beer${randomizeBeerDivId}`);
+    console.log(randomBeer);
+    if (randomBeer) {
+        randomBeer.style.display = "flex";
+    }
+}
+// randomize()
 /* function showData(data) {
     data.forEach(beerInfo => {
         console.log(beerInfo.name);

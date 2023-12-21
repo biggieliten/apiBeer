@@ -3,8 +3,17 @@
   padding: 0;
   box-sizing: border-box;
 } */
+body {
+  display: flex;
+}
 
 #wrapper img {
   width: 10vw;
   height: 30vh;
+}
+
+#wrapper > div {
+  display: none;
+  width: 40vw;
+  height: 60vh;
 }

@@ -10,7 +10,9 @@ interface BeerKeys {
     food_pairing: string[];
     ingredients: string | number[];
     image_url?: string;
-    volume: number | string;
+    volume: any | number;
+	value: number;
+	unit: string;
     brewers_tips: string;
     description: string;
 
@@ -24,8 +26,8 @@ async function fetchUserData(url: string) {
         }
         const beerData: BeerKeys[] = await response.json();
         showData(beerData);
+		console.log(beerData);
     }
-	
     catch (error) {
 		console.error("Fetch error:", error);
         throw new Error("Unable to fetch user data");
@@ -58,7 +60,7 @@ function showData(data: BeerKeys[]) {
         // Skapa och lägg till ABV (alkoholhalt per volymenhet)
         
         const abvElement = document.createElement("p");
-        abvElement.textContent = `ABV: ${beerInfo.abv}%`;
+        abvElement.textContent = `Alcohol By Volume: ${beerInfo.abv}%`;
 		abvElement.classList.add("abv" + beerInfo.id)
         beerElement.appendChild(abvElement);
 
@@ -79,7 +81,8 @@ function showData(data: BeerKeys[]) {
         }
         // Skapa och lägg till volymen
         const volumeElement = document.createElement("p");
-        volumeElement.textContent = `Volume: ${beerInfo.volume}`;
+        volumeElement.textContent = `Volume: ${beerInfo.volume.value} ${beerInfo.volume.unit}`;
+        // volumeElement.textContent = `Volume: ${beerInfo.volume[1]}`;
 		volumeElement.classList.add("volume" + beerInfo.id);
         beerElement.appendChild(volumeElement);
 

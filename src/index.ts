@@ -73,6 +73,7 @@ function showData(data: BeerKeys[]) {
             const imageElement = document.createElement("img");
             imageElement.src = beerInfo.image_url;
             imageElement.alt = beerInfo.name;
+			imageElement.classList.add("beerIMG-" + beerInfo.id);
             beerElement.appendChild(imageElement);
         }
         // Skapa och lägg till volymen

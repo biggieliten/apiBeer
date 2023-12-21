@@ -44,6 +44,14 @@ function showData(data: BeerKeys[]) {
         const beerElement = document.createElement("div");
         beerElement.setAttribute('id', `beer${beerInfo.id}`);
 
+        // Skapa och lägg till en bild om tillgänglig
+        if (beerInfo.image_url) {
+            const imageElement = document.createElement("img");
+            imageElement.src = beerInfo.image_url;
+            imageElement.alt = beerInfo.name;
+			imageElement.classList.add("beerIMG-" + beerInfo.id);
+            beerElement.appendChild(imageElement);
+        }
         // skapa h2 element för namn
         const nameElement = document.createElement("h2");
         nameElement.textContent = beerInfo.name;
@@ -71,14 +79,6 @@ function showData(data: BeerKeys[]) {
 		descriptionElement.classList.add("description" + beerInfo.id);
         beerElement.appendChild(descriptionElement);
 
-        // Skapa och lägg till en bild om tillgänglig
-        if (beerInfo.image_url) {
-            const imageElement = document.createElement("img");
-            imageElement.src = beerInfo.image_url;
-            imageElement.alt = beerInfo.name;
-			imageElement.classList.add("beerIMG-" + beerInfo.id);
-            beerElement.appendChild(imageElement);
-        }
         // Skapa och lägg till volymen
         const volumeElement = document.createElement("p");
         volumeElement.textContent = `Volume: ${beerInfo.volume.value} ${beerInfo.volume.unit}`;
@@ -117,13 +117,13 @@ function randomize(){
 	let idCheck: string = `beer${randomizeBeerDivId}`;
 
 	console.log(idCheck);
+
 	let randomBeer:HTMLElement = document.getElementById(`beer${randomizeBeerDivId}`);
 
 	console.log(randomBeer);
 	if (randomBeer) {
 		randomBeer.style.display = "flex"
 	}
-	
 }
 
 // randomize()

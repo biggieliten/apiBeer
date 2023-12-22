@@ -122,7 +122,7 @@ function showData(data: BeerKeys[]) {
         wrapper?.appendChild(beerElement);
 
 
-		function showBeerData(): void{
+		/* function showBeerData(): void{
 			taglineElement.style.display = "flex";
 			abvElement.style.display = "flex";
 			descriptionElement.style.display = "flex";
@@ -134,7 +134,7 @@ function showData(data: BeerKeys[]) {
 
 
 
-		}
+		} */
 
 
     });
@@ -163,4 +163,50 @@ function randomize(): void {
         randomBeer.style.display = "flex";
     }
 }
+
+function showBeerData(event: Event): void {
+    // Hämta den klickade knappen och dess närmaste ölcontainer
+    const clickedButton = event.currentTarget as HTMLButtonElement;
+    const beerId = clickedButton.dataset.beerId; // Anta att du har lagrat öl-ID:t som ett dataset-attribut på knappen
+
+    // Dölj alla öl-element
+    const allBeerElements: NodeListOf<HTMLElement> = document.querySelectorAll('.beer-container');
+    allBeerElements.forEach(element => {
+        element.style.display = "none";
+    });
+
+    // Visa det aktuella ölet
+    const beerContainer = document.getElementById(`beer${beerId}`);
+    if (beerContainer) {
+        beerContainer.style.display = "flex";
+
+        // Hämta det aktuella ölets detaljelement
+        const taglineElement = document.getElementById(`tagline${beerId}`) as HTMLElement;
+        const abvElement = document.getElementById(`abv${beerId}`) as HTMLElement;
+        const descriptionElement = document.getElementById(`description${beerId}`) as HTMLElement;
+        const volumeElement = document.getElementById(`volume${beerId}`) as HTMLElement;
+        const foodPairingElement = document.getElementById(`foodPairing${beerId}`) as HTMLElement;
+        const tipsElement = document.getElementById(`tips${beerId}`) as HTMLElement;
+
+        // Nollställ de specifika detaljerna
+        if (taglineElement && abvElement && descriptionElement && volumeElement && foodPairingElement && tipsElement) {
+            taglineElement.style.display = "none";  // Ändra här till "none" för att dölja detaljerna
+            abvElement.style.display = "none";
+            descriptionElement.style.display = "none";
+            volumeElement.style.display = "none";
+            foodPairingElement.style.display = "none";
+            tipsElement.style.display = "none";
+        }
+
+        // Visa de specifika detaljerna som du vill ha
+        // taglineElement.style.display = "flex";
+        // abvElement.style.display = "flex";
+        // descriptionElement.style.display = "flex";
+        // volumeElement.style.display = "flex";
+        // foodPairingElement.style.display = "block";
+        // tipsElement.style.display = "flex";
+    }
+}
+
+
 

@@ -109,21 +109,27 @@ function showData(data: BeerKeys[]) {
 	randomize()
 }
 
-
-
-function randomize(): void{
-	let randomizeBeerDivId: number = Math.floor(Math.random() * 25 + 1 );
-	 
-	let idCheck: string = `beer${randomizeBeerDivId}`;
-
-	console.log(idCheck);
-
-	let randomBeer:HTMLElement = document.getElementById(`beer${randomizeBeerDivId}`);
-
-	console.log(randomBeer);
-	if (randomBeer) {
-		randomBeer.style.display = "flex"
-	}
-
+const randomizeButton: HTMLButtonElement | null = document.getElementById("randomizeButton") as HTMLButtonElement;
+if (randomizeButton) {
+    randomizeButton.addEventListener("click", randomize);
 }
 
+
+function randomize(): void {
+    let randomizeBeerDivId: number = Math.floor(Math.random() * 25 + 1);
+    let idCheck: string = `beer${randomizeBeerDivId}`;
+    console.log(idCheck);
+
+    // Göm alla öl-element
+    const allBeerElements: NodeListOf<HTMLElement> = document.querySelectorAll('[id^="beer"]');
+    allBeerElements.forEach(element => {
+        element.style.display = "none";
+    });
+
+    // Visa den slumpade ölen
+    let randomBeer: HTMLElement = document.getElementById(`beer${randomizeBeerDivId}`);
+    console.log(randomBeer);
+    if (randomBeer) {
+        randomBeer.style.display = "flex";
+    }
+}

@@ -85,10 +85,20 @@ function showData(data) {
     });
     randomize();
 }
+const randomizeButton = document.getElementById("randomizeButton");
+if (randomizeButton) {
+    randomizeButton.addEventListener("click", randomize);
+}
 function randomize() {
     let randomizeBeerDivId = Math.floor(Math.random() * 25 + 1);
     let idCheck = `beer${randomizeBeerDivId}`;
     console.log(idCheck);
+    // Göm alla öl-element
+    const allBeerElements = document.querySelectorAll('[id^="beer"]');
+    allBeerElements.forEach(element => {
+        element.style.display = "none";
+    });
+    // Visa den slumpade ölen
     let randomBeer = document.getElementById(`beer${randomizeBeerDivId}`);
     console.log(randomBeer);
     if (randomBeer) {

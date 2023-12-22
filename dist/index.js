@@ -18,6 +18,7 @@ function fetchUserData(url) {
             }
             const beerData = yield response.json();
             showData(beerData);
+            console.log(beerData);
         }
         catch (error) {
             console.error("Fetch error:", error);
@@ -32,54 +33,55 @@ function showData(data) {
         // skapa div element för varje ölsort
         const beerElement = document.createElement("div");
         beerElement.setAttribute('id', `beer${beerInfo.id}`);
-        // skapa h2 element för namn
-        const nameElement = document.createElement("h2");
-        nameElement.textContent = beerInfo.name;
-        nameElement.classList.add("name" + beerInfo.id);
-        beerElement.appendChild(nameElement);
-        // Skapa och lägg till tagline
-        const taglineElement = document.createElement("p");
-        taglineElement.textContent = `Tagline: ${beerInfo.tagline}`;
-        taglineElement.classList.add("tagline" + beerInfo.id);
-        beerElement.appendChild(taglineElement);
-        // Skapa och lägg till ABV (alkoholhalt per volymenhet)
-        const abvElement = document.createElement("p");
-        abvElement.textContent = `ABV: ${beerInfo.abv}%`;
-        abvElement.classList.add("abv" + beerInfo.id);
-        beerElement.appendChild(abvElement);
-        // Skapa och lägg till beskrivningen
-        const descriptionElement = document.createElement("p");
-        descriptionElement.textContent = beerInfo.description;
-        descriptionElement.classList.add("description" + beerInfo.id);
-        beerElement.appendChild(descriptionElement);
         // Skapa och lägg till en bild om tillgänglig
         if (beerInfo.image_url) {
             const imageElement = document.createElement("img");
             imageElement.src = beerInfo.image_url;
             imageElement.alt = beerInfo.name;
             imageElement.classList.add("beerIMG-" + beerInfo.id);
-            beerElement.appendChild(imageElement);
+            beerElement === null || beerElement === void 0 ? void 0 : beerElement.appendChild(imageElement);
         }
+        // skapa h2 element för namn
+        const nameElement = document.createElement("h2");
+        nameElement.textContent = beerInfo.name;
+        nameElement.classList.add("name" + beerInfo.id);
+        beerElement === null || beerElement === void 0 ? void 0 : beerElement.appendChild(nameElement);
+        // Skapa och lägg till tagline
+        const taglineElement = document.createElement("p");
+        taglineElement.textContent = `${beerInfo.tagline}`;
+        taglineElement.classList.add("tagline" + beerInfo.id);
+        beerElement === null || beerElement === void 0 ? void 0 : beerElement.appendChild(taglineElement);
+        // Skapa och lägg till ABV (alkoholhalt per volymenhet)
+        const abvElement = document.createElement("p");
+        abvElement.textContent = `Alcohol By Volume: ${beerInfo.abv}%`;
+        abvElement.classList.add("abv" + beerInfo.id);
+        beerElement === null || beerElement === void 0 ? void 0 : beerElement.appendChild(abvElement);
+        // Skapa och lägg till beskrivningen
+        const descriptionElement = document.createElement("p");
+        descriptionElement.textContent = beerInfo.description;
+        descriptionElement.classList.add("description" + beerInfo.id);
+        beerElement === null || beerElement === void 0 ? void 0 : beerElement.appendChild(descriptionElement);
         // Skapa och lägg till volymen
         const volumeElement = document.createElement("p");
-        volumeElement.textContent = `Volume: ${beerInfo.volume}`;
+        volumeElement.textContent = `Volume: ${beerInfo.volume.value} ${beerInfo.volume.unit}`;
+        // volumeElement.textContent = `Volume: ${beerInfo.volume[1]}`;
         volumeElement.classList.add("volume" + beerInfo.id);
-        beerElement.appendChild(volumeElement);
+        beerElement === null || beerElement === void 0 ? void 0 : beerElement.appendChild(volumeElement);
         const foodPairingElement = document.createElement("ul");
         beerInfo.food_pairing.forEach(food => {
             const listItem = document.createElement("li");
             listItem.textContent = food;
             foodPairingElement.classList.add("foodPairing" + beerInfo.id);
-            foodPairingElement.appendChild(listItem);
+            foodPairingElement === null || foodPairingElement === void 0 ? void 0 : foodPairingElement.appendChild(listItem);
         });
-        beerElement.appendChild(foodPairingElement);
+        beerElement === null || beerElement === void 0 ? void 0 : beerElement.appendChild(foodPairingElement);
         // Skapa och lägg till bryggarens tips
         const tipsElement = document.createElement("p");
         tipsElement.textContent = `Brewer's Tips: ${beerInfo.brewers_tips}`;
         tipsElement.classList.add("tips" + beerInfo.id);
-        beerElement.appendChild(tipsElement);
+        beerElement === null || beerElement === void 0 ? void 0 : beerElement.appendChild(tipsElement);
         // Lägg till ölelementet i "wrapper"
-        wrapper.appendChild(beerElement);
+        wrapper === null || wrapper === void 0 ? void 0 : wrapper.appendChild(beerElement);
     });
     randomize();
 }
@@ -93,28 +95,3 @@ function randomize() {
         randomBeer.style.display = "flex";
     }
 }
-// randomize()
-/* function showData(data) {
-    data.forEach(beerInfo => {
-        console.log(beerInfo.name);
-
-        const beerElement = document.createElement("div");
-        beerElement.textContent = `${beerInfo.name}`
-        beerElement.classList.add("beer-" + beerInfo.id );
-
-        wrapper.appendChild(beerElement)
-    });
- */
-// data.forEach(beerInfo => {
-//     console.log(beerInfo.name);
-// 	const beerElement = document.createElement("div");
-// 	beerElement.textContent = `${beerInfo.name} `
-// 	// const beerDesc = document.createElement("p");
-// 	// const beerAbv = document.createElement("p");
-// 	// const beerVol = document.createElement("p");
-// 	// const beerIngred = document.createElement("p");
-// 	// const beerHops = document.createElement("p");
-// 	// const beerPairing = document.createElement("p");
-// 	// const beerHops = document.createElement("p");
-// 	// const beerHops = document.createElement("p");
-// 	wrapper.appendChild(beerElement)

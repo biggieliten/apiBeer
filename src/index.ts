@@ -53,6 +53,14 @@ function showData(data: BeerKeys[]) {
             myButton.addEventListener("click", randomize);
         }
 
+		const showMoreButton: HTMLButtonElement = document.createElement("button");
+		showMoreButton.textContent = "Show more >";
+		showMoreButton.classList.add('show-more-button')
+		beerElement?.appendChild(showMoreButton);
+		
+		showMoreButton.addEventListener("click", showBeerData);
+
+
         // Skapa och lägg till en bild om tillgänglig
         if (beerInfo.image_url) {
             const imageElement: HTMLImageElement = document.createElement("img");
@@ -110,10 +118,23 @@ function showData(data: BeerKeys[]) {
         tipsElement.classList.add("tips" + beerInfo.id);
         beerElement?.appendChild(tipsElement);
 
-
-
         // Lägg till ölelementet i "wrapper"
         wrapper?.appendChild(beerElement);
+
+
+		function showBeerData(): void{
+			taglineElement.style.display = "flex";
+			abvElement.style.display = "flex";
+			descriptionElement.style.display = "flex";
+			volumeElement.style.display = "flex";
+			foodPairingElement.style.display = "block";
+			tipsElement.style.display = "flex";
+			
+
+
+
+
+		}
 
 
     });
@@ -142,3 +163,4 @@ function randomize(): void {
         randomBeer.style.display = "flex";
     }
 }
+

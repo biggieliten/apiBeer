@@ -29,7 +29,7 @@
 #wrapper > div {
   padding: 1rem;
   display: none;
-  width: 30vw;
+  width: 25vw;
   height: 90vh;
   flex-direction: column;
   border-radius: 20px;
@@ -60,4 +60,13 @@ p {
   font-size: 16px;
   border: none;
   cursor: pointer;
+}
+.show-more-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-top: 0.5rem;
 }

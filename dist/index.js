@@ -40,6 +40,11 @@ function showData(data) {
         if (myButton) {
             myButton.addEventListener("click", randomize);
         }
+        const showMoreButton = document.createElement("button");
+        showMoreButton.textContent = "Show more >";
+        showMoreButton.classList.add('show-more-button');
+        beerElement === null || beerElement === void 0 ? void 0 : beerElement.appendChild(showMoreButton);
+        showMoreButton.addEventListener("click", showBeerData);
         // Skapa och lägg till en bild om tillgänglig
         if (beerInfo.image_url) {
             const imageElement = document.createElement("img");
@@ -89,6 +94,14 @@ function showData(data) {
         beerElement === null || beerElement === void 0 ? void 0 : beerElement.appendChild(tipsElement);
         // Lägg till ölelementet i "wrapper"
         wrapper === null || wrapper === void 0 ? void 0 : wrapper.appendChild(beerElement);
+        function showBeerData() {
+            taglineElement.style.display = "flex";
+            abvElement.style.display = "flex";
+            descriptionElement.style.display = "flex";
+            volumeElement.style.display = "flex";
+            foodPairingElement.style.display = "block";
+            tipsElement.style.display = "flex";
+        }
     });
     randomize();
 }

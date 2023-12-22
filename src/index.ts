@@ -41,68 +41,68 @@ function showData(data: BeerKeys[]) {
         // console.log(beerInfo.name);
 
         // skapa div element för varje ölsort
-        const beerElement = document.createElement("div");
+        const beerElement: HTMLDivElement = document.createElement("div");
         beerElement.setAttribute('id', `beer${beerInfo.id}`);
 
         // Skapa och lägg till en bild om tillgänglig
         if (beerInfo.image_url) {
-            const imageElement = document.createElement("img");
+            const imageElement: HTMLImageElement = document.createElement("img");
             imageElement.src = beerInfo.image_url;
             imageElement.alt = beerInfo.name;
 			imageElement.classList.add("beerIMG-" + beerInfo.id);
-            beerElement.appendChild(imageElement);
+            beerElement?.appendChild(imageElement);
         }
         // skapa h2 element för namn
-        const nameElement = document.createElement("h2");
+        const nameElement: HTMLHeadingElement = document.createElement("h2");
         nameElement.textContent = beerInfo.name;
 		nameElement.classList.add("name" + beerInfo.id);
-        beerElement.appendChild(nameElement);
+        beerElement?.appendChild(nameElement);
 
         // Skapa och lägg till tagline
 
-        const taglineElement = document.createElement("p");
+        const taglineElement: HTMLParagraphElement = document.createElement("p");
         taglineElement.textContent = `${beerInfo.tagline}`;
 		taglineElement.classList.add("tagline" + beerInfo.id);
-        beerElement.appendChild(taglineElement);
+        beerElement?.appendChild(taglineElement);
 
         // Skapa och lägg till ABV (alkoholhalt per volymenhet)
         
-        const abvElement = document.createElement("p");
+        const abvElement: HTMLParagraphElement = document.createElement("p");
         abvElement.textContent = `Alcohol By Volume: ${beerInfo.abv}%`;
 		abvElement.classList.add("abv" + beerInfo.id)
-        beerElement.appendChild(abvElement);
+        beerElement?.appendChild(abvElement);
 
         // Skapa och lägg till beskrivningen
 
-        const descriptionElement = document.createElement("p");
+        const descriptionElement: HTMLParagraphElement = document.createElement("p");
         descriptionElement.textContent = beerInfo.description;
 		descriptionElement.classList.add("description" + beerInfo.id);
-        beerElement.appendChild(descriptionElement);
+        beerElement?.appendChild(descriptionElement);
 
         // Skapa och lägg till volymen
-        const volumeElement = document.createElement("p");
+        const volumeElement: HTMLParagraphElement = document.createElement("p");
         volumeElement.textContent = `Volume: ${beerInfo.volume.value} ${beerInfo.volume.unit}`;
         // volumeElement.textContent = `Volume: ${beerInfo.volume[1]}`;
 		volumeElement.classList.add("volume" + beerInfo.id);
-        beerElement.appendChild(volumeElement);
+        beerElement?.appendChild(volumeElement);
 
-        const foodPairingElement = document.createElement("ul");
+        const foodPairingElement: HTMLUListElement = document.createElement("ul");
         beerInfo.food_pairing.forEach(food => {
-            const listItem = document.createElement("li");
+            const listItem: HTMLLIElement = document.createElement("li");
             listItem.textContent = food;
 			foodPairingElement.classList.add("foodPairing" + beerInfo.id);
-            foodPairingElement.appendChild(listItem);
+            foodPairingElement?.appendChild(listItem);
         });	
-        beerElement.appendChild(foodPairingElement);
+        beerElement?.appendChild(foodPairingElement);
 
         // Skapa och lägg till bryggarens tips
-        const tipsElement = document.createElement("p");
+		const tipsElement: HTMLParagraphElement = document.createElement("p");
         tipsElement.textContent = `Brewer's Tips: ${beerInfo.brewers_tips}`;
 		tipsElement.classList.add("tips" + beerInfo.id);
-        beerElement.appendChild(tipsElement);
+        beerElement?.appendChild(tipsElement);
 
         // Lägg till ölelementet i "wrapper"
-        wrapper.appendChild(beerElement);
+        wrapper?.appendChild(beerElement);
 
 		
     });
@@ -111,7 +111,7 @@ function showData(data: BeerKeys[]) {
 
 
 
-function randomize(){
+function randomize(): void{
 	let randomizeBeerDivId: number = Math.floor(Math.random() * 25 + 1 );
 	 
 	let idCheck: string = `beer${randomizeBeerDivId}`;

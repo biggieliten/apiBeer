@@ -33,6 +33,13 @@ function showData(data) {
         // skapa div element för varje ölsort
         const beerElement = document.createElement("div");
         beerElement.setAttribute('id', `beer${beerInfo.id}`);
+        const myButton = document.createElement("button");
+        myButton.textContent = 'Randomize';
+        myButton.classList.add('button');
+        beerElement === null || beerElement === void 0 ? void 0 : beerElement.appendChild(myButton);
+        if (myButton) {
+            myButton.addEventListener("click", randomize);
+        }
         // Skapa och lägg till en bild om tillgänglig
         if (beerInfo.image_url) {
             const imageElement = document.createElement("img");
@@ -84,10 +91,6 @@ function showData(data) {
         wrapper === null || wrapper === void 0 ? void 0 : wrapper.appendChild(beerElement);
     });
     randomize();
-}
-const randomizeButton = document.getElementById("randomizeButton");
-if (randomizeButton) {
-    randomizeButton.addEventListener("click", randomize);
 }
 function randomize() {
     let randomizeBeerDivId = Math.floor(Math.random() * 25 + 1);

@@ -2,6 +2,7 @@ const base_url: string = "https://api.punkapi.com/v2/beers ";
 
 const wrapper = document.getElementById("wrapper") as HTMLDivElement
 
+
 interface BeerKeys {
     id: number;
     name: string;
@@ -11,8 +12,8 @@ interface BeerKeys {
     ingredients: string | number[];
     image_url?: string;
     volume: any | number;
-	value: number;
-	unit: string;
+    value: number;
+    unit: string;
     brewers_tips: string;
     description: string;
 
@@ -22,14 +23,14 @@ async function fetchUserData(url: string) {
     try {
         const response = await fetch(url);
         if (!response.ok) {
-			throw new Error(`http error: ${response.status}`)
+            throw new Error(`http error: ${response.status}`)
         }
         const beerData: BeerKeys[] = await response.json();
         showData(beerData);
-		console.log(beerData);
+        console.log(beerData);
     }
     catch (error) {
-		console.error("Fetch error:", error);
+        console.error("Fetch error:", error);
         throw new Error("Unable to fetch user data");
     }
 }
@@ -44,75 +45,83 @@ function showData(data: BeerKeys[]) {
         const beerElement: HTMLDivElement = document.createElement("div");
         beerElement.setAttribute('id', `beer${beerInfo.id}`);
 
+        const myButton: HTMLButtonElement = document.createElement("button");
+        myButton.textContent = 'Randomize'
+        myButton.classList.add('button')
+        beerElement?.appendChild(myButton);
+        if (myButton) {
+            myButton.addEventListener("click", randomize);
+        }
+
         // Skapa och lägg till en bild om tillgänglig
         if (beerInfo.image_url) {
             const imageElement: HTMLImageElement = document.createElement("img");
             imageElement.src = beerInfo.image_url;
             imageElement.alt = beerInfo.name;
-			imageElement.classList.add("beerIMG-" + beerInfo.id);
+            imageElement.classList.add("beerIMG-" + beerInfo.id);
             beerElement?.appendChild(imageElement);
         }
         // skapa h2 element för namn
         const nameElement: HTMLHeadingElement = document.createElement("h2");
         nameElement.textContent = beerInfo.name;
-		nameElement.classList.add("name" + beerInfo.id);
+        nameElement.classList.add("name" + beerInfo.id);
         beerElement?.appendChild(nameElement);
 
         // Skapa och lägg till tagline
 
         const taglineElement: HTMLParagraphElement = document.createElement("p");
         taglineElement.textContent = `${beerInfo.tagline}`;
-		taglineElement.classList.add("tagline" + beerInfo.id);
+        taglineElement.classList.add("tagline" + beerInfo.id);
         beerElement?.appendChild(taglineElement);
 
         // Skapa och lägg till ABV (alkoholhalt per volymenhet)
-        
+
         const abvElement: HTMLParagraphElement = document.createElement("p");
         abvElement.textContent = `Alcohol By Volume: ${beerInfo.abv}%`;
-		abvElement.classList.add("abv" + beerInfo.id)
+        abvElement.classList.add("abv" + beerInfo.id)
         beerElement?.appendChild(abvElement);
 
         // Skapa och lägg till beskrivningen
 
         const descriptionElement: HTMLParagraphElement = document.createElement("p");
         descriptionElement.textContent = beerInfo.description;
-		descriptionElement.classList.add("description" + beerInfo.id);
+        descriptionElement.classList.add("description" + beerInfo.id);
         beerElement?.appendChild(descriptionElement);
 
         // Skapa och lägg till volymen
         const volumeElement: HTMLParagraphElement = document.createElement("p");
         volumeElement.textContent = `Volume: ${beerInfo.volume.value} ${beerInfo.volume.unit}`;
         // volumeElement.textContent = `Volume: ${beerInfo.volume[1]}`;
-		volumeElement.classList.add("volume" + beerInfo.id);
+        volumeElement.classList.add("volume" + beerInfo.id);
         beerElement?.appendChild(volumeElement);
 
         const foodPairingElement: HTMLUListElement = document.createElement("ul");
         beerInfo.food_pairing.forEach(food => {
             const listItem: HTMLLIElement = document.createElement("li");
             listItem.textContent = food;
-			foodPairingElement.classList.add("foodPairing" + beerInfo.id);
+            foodPairingElement.classList.add("foodPairing" + beerInfo.id);
             foodPairingElement?.appendChild(listItem);
-        });	
+        });
         beerElement?.appendChild(foodPairingElement);
 
         // Skapa och lägg till bryggarens tips
-		const tipsElement: HTMLParagraphElement = document.createElement("p");
+        const tipsElement: HTMLParagraphElement = document.createElement("p");
         tipsElement.textContent = `Brewer's Tips: ${beerInfo.brewers_tips}`;
-		tipsElement.classList.add("tips" + beerInfo.id);
+        tipsElement.classList.add("tips" + beerInfo.id);
         beerElement?.appendChild(tipsElement);
+
+
 
         // Lägg till ölelementet i "wrapper"
         wrapper?.appendChild(beerElement);
 
-		
+
     });
-	randomize()
+    randomize()
 }
 
-const randomizeButton: HTMLButtonElement | null = document.getElementById("randomizeButton") as HTMLButtonElement;
-if (randomizeButton) {
-    randomizeButton.addEventListener("click", randomize);
-}
+
+
 
 
 function randomize(): void {
